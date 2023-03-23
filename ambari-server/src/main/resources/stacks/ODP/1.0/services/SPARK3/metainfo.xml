@@ -208,13 +208,13 @@
             </dependency>
           </dependencies>
           <commandScript>
-            <script>scripts/livy2_server.py</script>
+            <script>scripts/livy3_server.py</script>
             <scriptType>PYTHON</scriptType>
             <timeout>600</timeout>
           </commandScript>
           <logs>
             <log>
-              <logId>livy2_server</logId>
+              <logId>livy3_server</logId>
               <primary>true</primary>
             </log>
           </logs>
@@ -229,11 +229,11 @@
         <config-type>spark3-thrift-sparkconf</config-type>
         <config-type>spark3-hive-site-override</config-type>
         <config-type>spark3-thrift-fairscheduler</config-type>
-        <config-type>livy2-client-conf</config-type>
-        <config-type>livy2-conf</config-type>
-        <config-type>livy2-env</config-type>
-        <config-type>livy2-log4j-properties</config-type>
-        <config-type>livy2-spark-blacklist</config-type>
+        <config-type>livy3-client-conf</config-type>
+        <config-type>livy3-conf</config-type>
+        <config-type>livy3-env</config-type>
+        <config-type>livy3-log4j-properties</config-type>
+        <config-type>livy3-spark-blacklist</config-type>
       </configuration-dependencies>
 
       <commandScript>
@@ -259,7 +259,7 @@
               <name>spark3_${stack_version}-python</name>
             </package>
             <package>
-              <name>livy2_${stack_version}</name>
+              <name>livy3_${stack_version}</name>
             </package>
           </packages>
         </osSpecific>
@@ -273,7 +273,7 @@
               <name>spark3-${stack_version}-python</name>
             </package>
             <package>
-              <name>livy2-${stack_version}</name>
+              <name>livy3-${stack_version}</name>
             </package>
           </packages>
         </osSpecific>

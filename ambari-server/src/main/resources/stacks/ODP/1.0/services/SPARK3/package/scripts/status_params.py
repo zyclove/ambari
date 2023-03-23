@@ -38,8 +38,8 @@ spark_history_server_pid_file = format("{spark_pid_dir}/spark-{spark_user}-org.a
 spark_thrift_server_pid_file = format("{spark_pid_dir}/spark-{spark_user}-org.apache.spark.sql.hive.thriftserver.HiveThriftServer2-1.pid")
 stack_name = default("/clusterLevelParams/stack_name", None)
 
-if "livy2-env" in config['configurations']:
-  livy2_user = config['configurations']['livy2-env']['livy2_user']
-  livy2_group = config['configurations']['livy2-env']['livy2_group']
-  livy2_pid_dir = config['configurations']['livy2-env']['livy2_pid_dir']
-  livy2_server_pid_file = format("{livy2_pid_dir}/livy-{livy2_user}-server.pid")
+if "livy3-env" in config['configurations']:
+  livy3_user = config['configurations']['livy3-env']['livy3_user']
+  livy3_group = config['configurations']['livy3-env']['livy3_group']
+  livy3_pid_dir = config['configurations']['livy3-env']['livy3_pid_dir']
+  livy3_server_pid_file = format("{livy3_pid_dir}/livy-{livy3_user}-server.pid")

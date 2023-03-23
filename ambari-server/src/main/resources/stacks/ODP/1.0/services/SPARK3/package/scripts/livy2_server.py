@@ -34,8 +34,8 @@ from resource_management.libraries.functions.format import format
 from resource_management.libraries.functions import stack_select
 from resource_management.libraries.functions import namenode_ha_utils
 
-from livy2_service import livy2_service
-from setup_livy2 import setup_livy
+from livy3_service import livy3_service
+from setup_livy3 import setup_livy
 
 class LivyServer(Script):
 
@@ -60,19 +60,19 @@ class LivyServer(Script):
       self.wait_for_dfs_directories_created([params.entity_groupfs_store_dir, params.entity_groupfs_active_dir])
 
     self.configure(env)
-    livy2_service('server', upgrade_type=upgrade_type, action='start')
+    livy3_service('server', upgrade_type=upgrade_type, action='start')
 
   def stop(self, env, upgrade_type=None):
     import params
     env.set_params(params)
 
-    livy2_service('server', upgrade_type=upgrade_type, action='stop')
+    livy3_service('server', upgrade_type=upgrade_type, action='stop')
 
   def status(self, env):
     import status_params
     env.set_params(status_params)
 
-    check_process_status(status_params.livy2_server_pid_file)
+    check_process_status(status_params.livy3_server_pid_file)
 
   #  TODO move out and compose with similar method in resourcemanager.py
   def wait_for_dfs_directories_created(self, dirs):
@@ -81,8 +81,8 @@ class LivyServer(Script):
     ignored_dfs_dirs = HdfsResourceProvider.get_ignored_resources_list(params.hdfs_resource_ignore_file)
 
     if params.security_enabled:
-      Execute(format("{kinit_path_local} -kt {livy_kerberos_keytab} {livy2_principal}"),
-              user=params.livy2_user
+      Execute(format("{kinit_path_local} -kt {livy_kerberos_keytab} {livy3_principal}"),
+              user=params.livy3_user
               )
       Execute(format("{kinit_path_local} -kt {hdfs_user_keytab} {hdfs_principal_name}"),
               user=params.hdfs_user
@@ -93,7 +93,7 @@ class LivyServer(Script):
 
   def get_pid_files(self):
     import status_params
-    return [status_params.livy2_server_pid_file]
+    return [status_params.livy3_server_pid_file]
 
 
   @retry(times=8, sleep_time=20, backoff_factor=1, err_class=Fail)
@@ -121,7 +121,7 @@ class LivyServer(Script):
         dir_exists = ('FileStatus' in list_status)
       else:
         # have to do time expensive hdfs dfs -d check.
-        dfs_ret_code = shell.call(format("hdfs --config {hadoop_conf_dir} dfs -test -d " + dir_path), user=params.livy2_user)[0]
+        dfs_ret_code = shell.call(format("hdfs --config {hadoop_conf_dir} dfs -test -d " + dir_path), user=params.livy3_user)[0]
         dir_exists = not dfs_ret_code #dfs -test -d returns 0 in case the dir exists
 
       if not dir_exists:
@@ -139,11 +139,11 @@ class LivyServer(Script):
 
   def get_log_folder(self):
     import params
-    return params.livy2_log_dir
+    return params.livy3_log_dir
 
   def get_user(self):
     import params
-    return params.livy2_user
+    return params.livy3_user
 if __name__ == "__main__":
     LivyServer().execute()
 

@@ -35,9 +35,9 @@ CRITICAL_MESSAGE = "Connection failed on host {0}:{1} ({2})"
 
 logger = logging.getLogger('ambari_alerts')
 
-LIVY_SERVER_HOST_KEY = '{{livy2-conf/livy.server.host}}'
+LIVY_SERVER_HOST_KEY = '{{livy3-conf/livy.server.host}}'
 
-LIVY_SERVER_PORT_KEY = '{{livy2-conf/livy.server.port}}'
+LIVY_SERVER_PORT_KEY = '{{livy3-conf/livy.server.port}}'
 
 LIVYUSER_DEFAULT = 'livy'
 
@@ -48,7 +48,7 @@ SECURITY_ENABLED_KEY = '{{cluster-env/security_enabled}}'
 SMOKEUSER_KEYTAB_KEY = '{{cluster-env/smokeuser_keytab}}'
 SMOKEUSER_PRINCIPAL_KEY = '{{cluster-env/smokeuser_principal_name}}'
 SMOKEUSER_KEY = '{{cluster-env/smokeuser}}'
-LIVY_SSL_ENABLED_KEY = '{{livy2-conf/livy.keystore}}'
+LIVY_SSL_ENABLED_KEY = '{{livy3-conf/livy.keystore}}'
 
 # The configured Kerberos executable search paths, if any
 KERBEROS_EXECUTABLE_SEARCH_PATHS_KEY = '{{kerberos-env/executable_search_paths}}'
@@ -129,9 +129,9 @@ def execute(configurations={}, parameters={}, host_name=None):
     try:
         start_time = time.time()
         try:
-            livy2_livyserver_host = str(host_name)
+            livy3_livyserver_host = str(host_name)
 
-            livy_cmd = format("curl -s -o /dev/null -w'%{{http_code}}' --negotiate -u: -k {http_scheme}://{livy2_livyserver_host}:{port}/sessions | grep 200 ")
+            livy_cmd = format("curl -s -o /dev/null -w'%{{http_code}}' --negotiate -u: -k {http_scheme}://{livy3_livyserver_host}:{port}/sessions | grep 200 ")
 
             Execute(livy_cmd,
                     tries=3,

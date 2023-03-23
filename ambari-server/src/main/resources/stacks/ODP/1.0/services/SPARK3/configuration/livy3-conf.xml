@@ -104,7 +104,7 @@
     </property>
     <property>
         <name>livy.server.recovery.state-store.url</name>
-        <value>/livy2-recovery</value>
+        <value>/livy3-recovery</value>
         <description>
             Where Livy should store state for recovery.
         </description>

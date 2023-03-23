@@ -45,9 +45,9 @@ class SparkServiceCheck(Script):
             )
     if params.has_livyserver:
       live_livyserver_host = ""
-      for livyserver_host in params.livy2_livyserver_hosts:
+      for livyserver_host in params.livy3_livyserver_hosts:
         try:
-          Execute(format("curl -s -o /dev/null -w'%{{http_code}}' --negotiate -u: -k {livy2_http_scheme}://{livyserver_host}:{livy2_livyserver_port}/sessions | grep 200"),
+          Execute(format("curl -s -o /dev/null -w'%{{http_code}}' --negotiate -u: -k {livy3_http_scheme}://{livyserver_host}:{livy3_livyserver_port}/sessions | grep 200"),
                   tries=3,
                   try_sleep=1,
                   logoutput=True,
@@ -57,7 +57,7 @@ class SparkServiceCheck(Script):
           break
         except:
           pass
-      if len(params.livy2_livyserver_hosts) > 0 and live_livyserver_host == "":
+      if len(params.livy3_livyserver_hosts) > 0 and live_livyserver_host == "":
         raise Fail("Connection to all Livy servers failed")
     
 

@@ -28,9 +28,9 @@
       "path":"{{default('/configurations/spark3-env/spark_log_dir', '/var/log/spark3')}}/spark-*-org.apache.spark.sql.hive.thriftserver.HiveThriftServer2*.out"
     },
     {
-      "type":"livy2_server",
+      "type":"livy3_server",
       "rowtype":"service",
-      "path":"{{default('/configurations/livy2-env/livy2_log_dir', '/var/log/livy2')}}/livy-{{default('/configurations/livy2-env/livy2_user', 'livy')}}-server.out"
+      "path":"{{default('/configurations/livy3-env/livy3_log_dir', '/var/log/livy3')}}/livy-{{default('/configurations/livy3-env/livy3_user', 'livy')}}-server.out"
     }
   ],
   "filter":[
@@ -41,7 +41,7 @@
           "type":[
             "spark3_jobhistory_server",
             "spark3_thriftserver",
-            "livy2_server"
+            "livy3_server"
           ]
         }
       },

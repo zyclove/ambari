@@ -226,7 +226,7 @@ class Spark3Recommender(service_advisor.ServiceAdvisor):
   def __addZeppelinToLivy2SuperUsers(self, configurations, services):
     """
     If Kerberos is enabled AND Zeppelin is installed AND Spark3 Livy Server is installed, then set
-    livy2-conf/livy.superusers to contain the Zeppelin principal name from
+    livy3-conf/livy.superusers to contain the Zeppelin principal name from
     zeppelin-site/zeppelin.server.kerberos.principal
 
     :param configurations:
@@ -240,10 +240,10 @@ class Spark3Recommender(service_advisor.ServiceAdvisor):
         zeppelin_user = zeppelin_principal.split('@')[0] if zeppelin_principal else None
 
         if zeppelin_user:
-          livy2_conf = self.getServicesSiteProperties(services, 'livy2-conf')
+          livy3_conf = self.getServicesSiteProperties(services, 'livy3-conf')
 
-          if livy2_conf:
-            superusers = livy2_conf['livy.superusers'] if livy2_conf and 'livy.superusers' in livy2_conf else None
+          if livy3_conf:
+            superusers = livy3_conf['livy.superusers'] if livy3_conf and 'livy.superusers' in livy3_conf else None
 
             # add the Zeppelin user to the set of users
             if superusers:
@@ -256,7 +256,7 @@ class Spark3Recommender(service_advisor.ServiceAdvisor):
             if zeppelin_user not in _superusers:
               _superusers.append(zeppelin_user)
 
-              putLivy2ConfProperty = self.putProperty(configurations, 'livy2-conf', services)
+              putLivy2ConfProperty = self.putProperty(configurations, 'livy3-conf', services)
               putLivy2ConfProperty('livy.superusers', ','.join(_superusers))
 
 

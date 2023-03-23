@@ -55,7 +55,7 @@
           }
         },
         {
-          "livy2-conf": {
+          "livy3-conf": {
             "livy.server.auth.type": "kerberos",
             "livy.impersonation.enabled": "true"
           }
@@ -123,32 +123,32 @@
             {
               "name": "livyuser",
               "principal": {
-                "value": "${livy2-env/livy2_user}/_HOST@${realm}",
+                "value": "${livy3-env/livy3_user}/_HOST@${realm}",
                 "type" : "service",
-                "configuration": "livy2-conf/livy.server.launch.kerberos.principal",
-                "local_username": "${livy2-env/livy2_user}"
+                "configuration": "livy3-conf/livy.server.launch.kerberos.principal",
+                "local_username": "${livy3-env/livy3_user}"
               },
               "keytab": {
                 "file": "${keytab_dir}/livy.service.keytab",
                 "owner": {
-                  "name": "${livy2-env/livy2_user}",
+                  "name": "${livy3-env/livy3_user}",
                   "access": "r"
                 },
                 "group": {
                   "name": "${cluster-env/user_group}",
                   "access": ""
                 },
-                "configuration": "livy2-conf/livy.server.launch.kerberos.keytab"
+                "configuration": "livy3-conf/livy.server.launch.kerberos.keytab"
               }
             },
             {
               "name": "livy_spnego",
               "reference": "/spnego",
               "principal": {
-                "configuration": "livy2-conf/livy.server.auth.kerberos.principal"
+                "configuration": "livy3-conf/livy.server.auth.kerberos.principal"
               },
               "keytab": {
-                "configuration": "livy2-conf/livy.server.auth.kerberos.keytab"
+                "configuration": "livy3-conf/livy.server.auth.kerberos.keytab"
               }
             }
           ]

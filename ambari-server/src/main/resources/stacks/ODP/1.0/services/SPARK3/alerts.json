@@ -30,7 +30,7 @@
     ],
     "LIVY2_SERVER": [
       {
-        "name": "livy2_server_status",
+        "name": "livy3_server_status",
         "label": "Spark3 Livy Server",
         "description": "This host-level alert is triggered if the Livy2 Server cannot be determined to be up.",
         "interval": 1,

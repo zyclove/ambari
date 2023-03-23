@@ -21,7 +21,7 @@
 -->
 <configuration supports_adding_forbidden="true">
     <property>
-        <name>livy2_user</name>
+        <name>livy3_user</name>
         <display-name>Livy2 User</display-name>
         <value>livy</value>
         <property-type>USER</property-type>
@@ -34,15 +34,15 @@
                     <name>user_group</name>
                 </property>
                 <property>
-                    <type>livy2-env</type>
-                    <name>livy2_group</name>
+                    <type>livy3-env</type>
+                    <name>livy3_group</name>
                 </property>
             </user-groups>
         </value-attributes>
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
-        <name>livy2_group</name>
+        <name>livy3_group</name>
         <display-name>Livy2 Group</display-name>
         <value>livy</value>
         <property-type>GROUP</property-type>
@@ -53,9 +53,9 @@
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
-        <name>livy2_log_dir</name>
+        <name>livy3_log_dir</name>
         <display-name>Livy2 Log directory</display-name>
-        <value>/var/log/livy2</value>
+        <value>/var/log/livy3</value>
         <description>Livy Log Dir</description>
         <value-attributes>
             <type>directory</type>
@@ -63,9 +63,9 @@
         <on-ambari-upgrade add="false"/>
     </property>
     <property>
-        <name>livy2_pid_dir</name>
+        <name>livy3_pid_dir</name>
         <display-name>Livy2 PID directory</display-name>
-        <value>/var/run/livy2</value>
+        <value>/var/run/livy3</value>
         <value-attributes>
             <type>directory</type>
         </value-attributes>
@@ -96,8 +96,8 @@
             export SPARK_CONF_DIR=/etc/spark3/conf
             export JAVA_HOME={{java_home}}
             export HADOOP_CONF_DIR=/etc/hadoop/conf
-            export LIVY_LOG_DIR={{livy2_log_dir}}
-            export LIVY_PID_DIR={{livy2_pid_dir}}
+            export LIVY_LOG_DIR={{livy3_log_dir}}
+            export LIVY_PID_DIR={{livy3_pid_dir}}
             export LIVY_SERVER_JAVA_OPTS="-Xmx2g"
         </value>
         <value-attributes>

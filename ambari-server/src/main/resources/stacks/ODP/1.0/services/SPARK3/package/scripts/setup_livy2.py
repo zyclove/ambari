@@ -27,27 +27,27 @@ from resource_management import Directory, File, PropertiesFile, Template, Inlin
 def setup_livy(env, type, upgrade_type = None, action = None):
   import params
 
-  Directory([params.livy2_pid_dir, params.livy2_log_dir],
-            owner=params.livy2_user,
+  Directory([params.livy3_pid_dir, params.livy3_log_dir],
+            owner=params.livy3_user,
             group=params.user_group,
             mode=0775,
             cd_access='a',
             create_parents=True
   )
   if type == 'server' and action == 'config':
-    params.HdfsResource(params.livy2_hdfs_user_dir,
+    params.HdfsResource(params.livy3_hdfs_user_dir,
                         type="directory",
                         action="create_on_execute",
-                        owner=params.livy2_user,
+                        owner=params.livy3_user,
                         mode=0775
     )
     params.HdfsResource(None, action="execute")
 
-    if params.livy2_recovery_store == 'filesystem':
-      params.HdfsResource(params.livy2_recovery_dir,
+    if params.livy3_recovery_store == 'filesystem':
+      params.HdfsResource(params.livy3_recovery_dir,
                           type="directory",
                           action="create_on_execute",
-                          owner=params.livy2_user,
+                          owner=params.livy3_user,
                           mode=0700
          )
       params.HdfsResource(None, action="execute")
@@ -55,48 +55,48 @@ def setup_livy(env, type, upgrade_type = None, action = None):
     generate_logfeeder_input_config('spark3', Template("input.config-spark3.json.j2", extra_imports=[default]))
 
   # create livy-env.sh in etc/conf dir
-  File(os.path.join(params.livy2_conf, 'livy-env.sh'),
-       owner=params.livy2_user,
-       group=params.livy2_group,
-       content=InlineTemplate(params.livy2_env_sh),
+  File(os.path.join(params.livy3_conf, 'livy-env.sh'),
+       owner=params.livy3_user,
+       group=params.livy3_group,
+       content=InlineTemplate(params.livy3_env_sh),
        mode=0644,
   )
 
   # create livy-client.conf in etc/conf dir
-  PropertiesFile(format("{livy2_conf}/livy-client.conf"),
-                properties = params.config['configurations']['livy2-client-conf'],
+  PropertiesFile(format("{livy3_conf}/livy-client.conf"),
+                properties = params.config['configurations']['livy3-client-conf'],
                 key_value_delimiter = " ",
-                owner=params.livy2_user,
-                group=params.livy2_group,
+                owner=params.livy3_user,
+                group=params.livy3_group,
   )
 
   # create livy.conf in etc/conf dir
-  PropertiesFile(format("{livy2_conf}/livy.conf"),
-                properties = params.config['configurations']['livy2-conf'],
+  PropertiesFile(format("{livy3_conf}/livy.conf"),
+                properties = params.config['configurations']['livy3-conf'],
                 key_value_delimiter = " ",
-                owner=params.livy2_user,
-                group=params.livy2_group,
+                owner=params.livy3_user,
+                group=params.livy3_group,
   )
 
   # create log4j.properties in etc/conf dir
-  File(os.path.join(params.livy2_conf, 'log4j.properties'),
-       owner=params.livy2_user,
-       group=params.livy2_group,
-       content=params.livy2_log4j_properties,
+  File(os.path.join(params.livy3_conf, 'log4j.properties'),
+       owner=params.livy3_user,
+       group=params.livy3_group,
+       content=params.livy3_log4j_properties,
        mode=0644,
   )
 
   # create spark-blacklist.properties in etc/conf dir
-  File(os.path.join(params.livy2_conf, 'spark-blacklist.conf'),
-       owner=params.livy2_user,
-       group=params.livy2_group,
-       content=params.livy2_spark_blacklist_properties,
+  File(os.path.join(params.livy3_conf, 'spark-blacklist.conf'),
+       owner=params.livy3_user,
+       group=params.livy3_group,
+       content=params.livy3_spark_blacklist_properties,
        mode=0644,
   )
 
-  Directory(params.livy2_logs_dir,
-            owner=params.livy2_user,
-            group=params.livy2_group,
+  Directory(params.livy3_logs_dir,
+            owner=params.livy3_user,
+            group=params.livy3_group,
             mode=0755,
   )
 
