@@ -273,7 +273,7 @@
               <name>spark3-${stack_version}-python</name>
             </package>
             <package>
-              <name>livy3-${stack_version}</name>
+              <name>livy2-${stack_version}</name>
             </package>
           </packages>
         </osSpecific>
