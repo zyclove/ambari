@@ -22,7 +22,7 @@
 <configuration supports_adding_forbidden="true">
     <property>
         <name>livy3_user</name>
-        <display-name>Livy2 User</display-name>
+        <display-name>Livy3 User</display-name>
         <value>livy</value>
         <property-type>USER</property-type>
         <value-attributes>
